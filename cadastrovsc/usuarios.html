@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuários</title>
+    <link rel="stylesheet" href="css/usuarios.css">
+</head>
+<body>
+    <div class="top">
+        <li><a href="loginn.html">Sair</a></li>
+    </div>
+    <div class="container">
+        <div class="topo">
+            <h1>Usuários</h1>
+            <button id="novo" onclick="novoUsuario()" class="btn-novo">Novo Usuário</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Perfil</th>
+                    <th>Cidade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaUsuarios">
+            </tbody>
+        </table>
+    </div>
+
+<script src="js/usuarios.js"></script>
+</body>
+</html>
