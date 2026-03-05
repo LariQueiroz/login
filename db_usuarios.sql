@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 26/02/2026 às 19:43
+-- Tempo de geração: 05/03/2026 às 19:11
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -38,8 +38,16 @@ CREATE TABLE `usuarios` (
   `complemento` varchar(80) DEFAULT NULL,
   `cep` varchar(10) DEFAULT NULL,
   `cidade` varchar(100) DEFAULT NULL,
-  `estado` varchar(50) DEFAULT NULL
+  `estado` varchar(50) DEFAULT NULL,
+  `foto` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `perfil`, `endereco`, `bairro`, `complemento`, `cep`, `cidade`, `estado`, `foto`) VALUES
+(1, 'Maria da Silva', 'maria.silva@email.com', '123456', 'ADMIN', 'Rua das Flores, 123', 'Centro', 'Apto 202', '12345-678', 'São Paulo', 'SP', NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -60,7 +68,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
