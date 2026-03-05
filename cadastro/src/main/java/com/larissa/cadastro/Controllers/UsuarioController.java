@@ -1,6 +1,7 @@
 package com.larissa.cadastro.Controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,10 +30,9 @@ public class UsuarioController {
 	    }
 	   
 	    @PostMapping
-	    public ResponseEntity<Usuario> cadastrarUsuario(@RequestBody Usuario usuario){
-	        return ResponseEntity
-	                .status(HttpStatus.CREATED)
-	                .body(service.cadastrar(usuario));
+	    public ResponseEntity<Usuario> cadastrarUsuario(@RequestBody Usuario usuario) {
+	        Usuario novoUsuario = service.cadastrar(usuario);
+	        return ResponseEntity.status(HttpStatus.CREATED).body(novoUsuario);
 	    }
 	    @DeleteMapping("/{id}")
 	    public ResponseEntity<Void> deletarUsuario(@PathVariable Long id) {
@@ -43,8 +43,7 @@ public class UsuarioController {
 	    return ResponseEntity.notFound().build();
 	    }
 
-	    return ResponseEntity.noContent().build(); // 204
-	    //return ResponseEntity.ok(usuarioDeletado);
+	    return ResponseEntity.noContent().build(); 
 	    }
 
 	    @PutMapping("/{id}")
@@ -59,5 +58,19 @@ public class UsuarioController {
 	    }
 
 	    return ResponseEntity.ok(usuarioAtualizado);
+	    }
+	    @PostMapping("/login")
+	    public ResponseEntity<?> login(@RequestBody Map<String, String> dados) {
+
+	        String email = dados.get("email");
+	        String senha = dados.get("senha");
+
+	        Usuario usuario = service.login(email, senha);
+
+	        if (usuario == null) {
+	            return ResponseEntity.status(401).body("Email ou senha inválidos");
+	        }
+
+	        return ResponseEntity.ok(usuario);
 	    }
 }	    

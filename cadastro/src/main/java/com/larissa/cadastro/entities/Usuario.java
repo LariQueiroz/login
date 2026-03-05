@@ -1,5 +1,6 @@
 package com.larissa.cadastro.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -88,5 +89,14 @@ public String getEstado() {
 }
 public void setEstado(String estado) {
 	this.estado = estado;
+}
+@Column(columnDefinition = "LONGTEXT")
+private String foto;
+
+public String getFoto() {
+return foto;
+}
+public void setFoto(String foto) {
+this.foto = foto;
 }
 }
