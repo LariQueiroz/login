@@ -6,6 +6,9 @@ const btnSalvar = document.getElementById('btnSalvar');
 const titulo = document.getElementById('titulo');
 const mensagem = document.getElementById('mensagem');
 const grupoSenha = document.getElementById('grupoSenha');
+const fotoInput = document.getElementById('fotoInput');
+const preview = document.getElementById('preview');
+let fotoBase64 = ""; // Variável global para guardar a string da foto
 
 if (idUsuario) {
     titulo.innerText = 'Editar Usuário';
@@ -33,6 +36,9 @@ function carregarUsuario(id) {
             cep.value = u.cep || '';
             cidade.value = u.cidade || '';
             estado.value = u.estado || '';
+            fotoBase64 = u.foto;
+preview.src = u.foto;
+preview.style.display = 'block';
         })
         .catch(() => {
             mensagem.innerHTML =
@@ -53,7 +59,8 @@ form.addEventListener('submit', function (e) {
         complemento: complemento.value,
         cep: cep.value,
         cidade: cidade.value,
-        estado: estado.value
+        estado: estado.value,
+        foto: fotoBase64
     };
 
     // só envia senha se estiver cadastrando
@@ -88,4 +95,16 @@ form.addEventListener('submit', function (e) {
         mensagem.innerHTML =
             '<span class="erro">Erro ao salvar usuário.</span>';
     });
+});
+fotoInput.addEventListener('change', function() {
+const arquivo = this.files[0];
+if (arquivo) {
+const reader = new FileReader();
+reader.onload = function(e) {
+fotoBase64 = e.target.result; // Aqui está o texto da imagem
+preview.src = fotoBase64;
+preview.style.display = 'block';
+};
+reader.readAsDataURL(arquivo);
+}
 });

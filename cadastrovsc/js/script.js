@@ -24,12 +24,10 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
         return response.json();
     })
     .then(usuario => {
-        // salva usuário no navegador
         localStorage.setItem("usuarioLogado", JSON.stringify(usuario));
 
         alert("Bem-vindo " + usuario.nome);
 
-        // redireciona
         window.location.href = "usuarios.html";
     })
     .catch(error => {

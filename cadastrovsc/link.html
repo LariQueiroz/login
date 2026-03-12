@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link</title>
+    <link rel="stylesheet" href="css/link.css">
+</head>
+<body>
+<div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <div class="input-group">
+         <input type="email" id="email" placeholder="Email" required>
+      </div>
+            <div class="input-group"><input type="password" id="senha" placeholder="Senha" required></div>
+            <button type="submit">Entrar</button><a href="#" class="forgot-link" onclick="abrirModal()">Esqueci minha senha</a>
+               <div class="error" id="errorMsg"></div></form></div>
+                  <div id="modalRecuperacao"> 
+                     <div class="modal-content">
+                     <h3>Recuperar Senha</h3>
+                     <p style="font-size: 12px; margin: 10px 0; color: #666;">Enviaremos um link para o seu e-mail.</p>
+                       <div class="input-group"><input type="email" id="emailRecuperar" placeholder="Seu e-mail cadastrado">
+               </div>
+        <button onclick="enviarEmailRecuperacao()">Enviar Link</button>
+        <button onclick="fecharModal()" style="background: #ccc; color: #333; margin-top: 5px;">Cancelar</button>
+        <div id="statusRecuperacao" style="margin-top: 10px; font-size: 13px;"></div></div></div>
+        <script src="js/link.js"></script>
+</body>
+</html>
