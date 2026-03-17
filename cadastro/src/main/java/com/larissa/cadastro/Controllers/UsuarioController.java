@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.larissa.cadastro.entities.Usuario;
@@ -73,4 +74,29 @@ public class UsuarioController {
 
 	        return ResponseEntity.ok(usuario);
 	    }
+	    @PostMapping("/solicitar-recuperacao")
+	    public ResponseEntity<Void> solicitarRecuperacao(@RequestParam String email) {
+	        boolean enviado = service.enviarEmailRecuperacao(email);
+
+	        if (enviado) {
+	            return ResponseEntity.ok().build();
+	        } else {
+	            return ResponseEntity.notFound().build(); 
+	        }
+	    }
+	    
+	    @PostMapping("/redefinir-senha")
+	    public ResponseEntity<String> redefinirSenha(@RequestBody Map<String, String> payload) {
+	        String email = payload.get("email");
+	        String novaSenha = payload.get("novaSenha");
+
+	        boolean sucesso = service.redefinirSenha(email, novaSenha);
+
+	        if (sucesso) {
+	            return ResponseEntity.ok("Senha redefinida com sucesso!");
+	        } else {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado.");
+	        }
+	    }
+
 }	    

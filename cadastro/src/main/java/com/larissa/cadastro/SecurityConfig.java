@@ -22,6 +22,7 @@ public class SecurityConfig {
 	   .requestMatchers(HttpMethod.DELETE, "/usuarios/**").permitAll()
 	   .requestMatchers(HttpMethod.PUT, "/usuarios/**").permitAll()
 	.requestMatchers("/usuarios/**", "/login/**").permitAll()
+	.requestMatchers("/usuarios/solicitar-recuperacao", "/usuarios/redefinir-senha").permitAll()
 	.anyRequest().authenticated()
 	);
 

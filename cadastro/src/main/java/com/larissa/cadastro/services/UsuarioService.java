@@ -3,6 +3,8 @@ package com.larissa.cadastro.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -92,5 +94,46 @@ public class UsuarioService {
              }
              return usuario;
          }
+    	 @Autowired
+    	    private JavaMailSender mailSender; 
+
+    	    public boolean enviarEmailRecuperacao(String email) {
+
+    	        Usuario usuario = repository.findByEmail(email);
+
+    	        if (usuario != null) {
+
+    	            String link = "http://127.0.0.1:5500/redefinir-senha.html?email=" + email;
+
+    	            SimpleMailMessage mensagem = new SimpleMailMessage();
+    	            mensagem.setTo(email);
+    	            mensagem.setSubject("Recuperação de Senha - DevSenai");
+    	            mensagem.setText(
+    	                "Olá " + usuario.getNome() + ",\n\n" +
+    	                "Clique no link abaixo para criar uma nova senha:\n" +
+    	                link
+    	            );
+
+    	            mailSender.send(mensagem);
+
+    	            System.out.println("Email enviado para: " + email);
+
+    	            return true;
+    	        }
+
+    	        return false;
+    	    }
+    	    
+    	        public boolean redefinirSenha(String email, String novaSenha) {
+    	            Usuario usuario = repository.findByEmail(email);
+
+    	            if (usuario != null) {
+    	            	usuario.setSenha(new BCryptPasswordEncoder().encode(novaSenha));
+    	                repository.save(usuario);
+    	                return true;
+    	            }
+    	            return false;
+    	        }
+
     	 
 }
